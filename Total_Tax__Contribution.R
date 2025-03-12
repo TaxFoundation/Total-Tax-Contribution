@@ -440,11 +440,15 @@ Europe <- subset(oecd_europe_national_currency_wide, continent== "EU")
 EU27 <- subset(oecd_europe_national_currency_wide, eu27== 1)
 
 #Simple Means
+Alldata_mean_TL<- mean(oecd_europe_national_currency_wide$TL_per, na.rm=TRUE)
+Alldata_mean_REM<- mean(oecd_europe_national_currency_wide$REM_per, na.rm=TRUE)
+Alldata_mean_UNALLOC<- mean(oecd_europe_national_currency_wide$UNALLOC_per, na.rm=TRUE)
+Alldata_mean_NONB<- mean(oecd_europe_national_currency_wide$NONB_per, na.rm=TRUE)
+
 OECD_mean_TL <- mean(OECD$TL_per, na.rm=TRUE)
 OECD_mean_REM <- mean(OECD$REM_per, na.rm=TRUE)
 OECD_mean_UNALLOC <- mean(OECD$UNALLOC_per, na.rm=TRUE)
 OECD_mean_NONB <- mean(OECD$NONB_per, na.rm=TRUE)
-
 
 europe_mean_TL <- mean(Europe$TL_per, na.rm=TRUE)
 europe_mean_REM <- mean(Europe$REM_per, na.rm=TRUE)
@@ -458,13 +462,14 @@ eu27_mean_UNALLOC <- mean(EU27$UNALLOC_per, na.rm=TRUE)
 eu27_mean_NONB <- mean(EU27$NONB_per, na.rm=TRUE)
 
 #add the regional means to the table
+Alldata_mean<-c("NA","All Countries Average",round(Alldata_mean_TL, digits = 4), round(Alldata_mean_REM, digits = 4), round(Alldata_mean_UNALLOC, digits = 4), round(Alldata_mean_NONB, digits = 4))
 OECD_mean<-c("NA","OECD Average",round(OECD_mean_TL, digits = 4), round(OECD_mean_REM, digits = 4), round(OECD_mean_UNALLOC, digits = 4), round(OECD_mean_NONB, digits = 4))
 eu27_mean<-c("NA","EU 27 Average",round(eu27_mean_TL, digits = 4), round(eu27_mean_REM, digits = 4), round(eu27_mean_UNALLOC, digits = 4), round(eu27_mean_NONB, digits = 4))
 europe_mean<-c("NA", "Europe Average",round(europe_mean_TL, digits = 4), round(europe_mean_REM, digits = 4), round(europe_mean_UNALLOC, digits = 4), round(europe_mean_NONB, digits = 4))
 
 oecd_europe_national_currency_Final<- subset (oecd_europe_national_currency_wide, select = c("iso_3","country","TL_per","REM_per", "UNALLOC_per", "NONB_per"))
 
-data_Final<-rbind(oecd_europe_national_currency_Final,OECD_mean, eu27_mean, europe_mean)
+data_Final<-rbind(oecd_europe_national_currency_Final, Alldata_mean, OECD_mean, eu27_mean, europe_mean)
 
 colnames(data_Final)[colnames(data_Final)=="country"] <- "Country"
 colnames(data_Final)[colnames(data_Final)=="TL_per"] <- "Business Legal Tax Liability"
