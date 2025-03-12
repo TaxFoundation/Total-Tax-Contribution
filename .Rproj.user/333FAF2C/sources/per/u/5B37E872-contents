@@ -1,0 +1,55 @@
+###Total Tax Contribution###
+
+#Clean up working environment####
+rm(list=ls())
+gc()
+
+#Directory Variables####
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+R_code_files<-"C:/Users/acer/Documents/GitHub/Total Tax Contribution/R_code_files/"
+source_data<-"C:/Users/acer/Documents/GitHub/Total Tax Contribution/source_data/"
+final_outputs<-"C:/Users/acer/Documents/GitHub/Total Tax Contribution/final_outputs/"
+
+
+#Define Using function####
+using<-function(...,prompt=TRUE){
+  libs<-sapply(substitute(list(...))[-1],deparse)
+  req<-unlist(lapply(libs,require,character.only=TRUE))
+  need<-libs[req==FALSE]
+  n<-length(need)
+  installAndRequire<-function(){
+    install.packages(need)
+    lapply(need,require,character.only=TRUE)
+  }
+  if(n>0){
+    libsmsg<-if(n>2) paste(paste(need[1:(n-1)],collapse=", "),",",sep="") else need[1]
+    if(n>1){
+      libsmsg<-paste(libsmsg," and ", need[n],sep="")
+    }
+    libsmsg<-paste("The following packages count not be found: ",libsmsg,"n\r\n\rInstall missing packages?",collapse="")
+    if(prompt==FALSE){
+      installAndRequire()
+    }else if(winDialog(type=c("yesno"),libsmsg)=="YES"){
+      installAndRequire()
+    }
+  }
+}
+setwd("C:/Users/acer/Documents/GitHub/Total Tax Contribution/")
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+using(gtools)
+using(readxl)
+using(rvest)
+using(htmltab)
+using(stringr)
+using(naniar)
+using(OECD)
+using(plyr)
+using(dplyr)
+using(reshape2)
+using(countrycode)
+using(tidyverse)
+using(stringr)
+#using(IMFData)
+using(readr)
+using(scales)
