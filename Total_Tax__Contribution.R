@@ -67,9 +67,12 @@ colnames(country_iso_cont)[colnames(country_iso_cont)=="ISO3166.1.Alpha.2"] <- "
 colnames(country_iso_cont)[colnames(country_iso_cont)=="ISO3166.1.Alpha.3"] <- "iso_3"
 colnames(country_iso_cont)[colnames(country_iso_cont)=="Continent"] <- "continent"
 
+
 #Replace continent abbreviation 'NA' (North America) to 'NO' (R does not recognize 'NA' as a character)
 country_iso_cont$continent <- as.character(country_iso_cont$continent)
 country_iso_cont$continent <- if_else(is.na(country_iso_cont$continent),"NO", country_iso_cont$continent)
+country_iso_cont$continent <- ifelse(country_iso_cont$iso_3 == "TUR","EU",country_iso_cont$continent)
+
 
 #Add the jurisdictions Netherland Antilles (was split into different jurisdictions in 2010) and Kosovo (has not yet officially been assigned a country code)
 country_iso_cont$country <- as.character(country_iso_cont$country)
@@ -225,20 +228,22 @@ country_iso_cont_groups$Asia <- ifelse(country_iso_cont$continent == "AS",1,0)
 country_iso_cont_groups$Oceania <- ifelse(country_iso_cont$continent == "OC",1,0)
 
 
+#OECD Data: OECD Countries national currency####
 
-#OECD Data: OECD and non OECD Countries national currency####
+#2023 OECD countries. Data for AUS, GRE,POL JAP is missing
 
-url = "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,1.1/AUS+AUT+BEL+CAN+CHL+COL+CRI+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LVA+LTU+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+ATG+ARG+ARM+AZE+BHS+BGD+BRB+BLZ+BTN+BOL+BWA+BRA+BGR+BFA+CPV+KHM+CMR+TCD+CHN+COG+COK+CIV+HRV+CUB+COD+DOM+ECU+EGY+SLV+GNQ+SWZ+FJI+GAB+GEO+GHA+GTM+GIN+GUY+HND+HKG+IDN+JAM+KAZ+KEN+KIR+KGZ+LAO+LSO+LIE+MDG+MWI+MYS+MDV+MLI+MLT+MHL+MRT+MUS+MNG+MAR+MOZ+NAM+NRU+NIC+NER+NGA+PAK+PAN+PNG+PRY+PER+PHL+ROU+RWA+LCA+WSM+SEN+SYC+SLE+SGP+SLB+SOM+ZAF+LKA+THA+TLS+TGO+TKL+TTO+TUN+UGA+UKR+URY+VUT+VNM+ZMB..S13.T_1000+T_1100+T_1110+T_1120+T_1200+T_1210+T_1220+T_1300+T_2000+T_2100+T_2110+T_2120+T_2200+T_2210+T_2220+T_2300+T_2310+T_2320+T_2400+T_2410+T_2420+T_3000+T_4000+T_4100+T_4110+T_4120+T_4200+T_4210+T_4220+T_4300+T_4310+T_4320+T_4400+T_4500+T_4510+T_4520+T_4600+T_5000+T_5100+T_5110+T_5111+T_5112+T_5113+T_5120+T_5121+T_5122+T_5123+T_5124+T_5125+T_5126+T_5127+T_5128+T_5130+T_5200+T_5210+T_5211+T_5212+T_5213+T_5220+T_5300+T_6000+T_6100+T_6200+T_CUS+_T..XDC.A?startPeriod=2022&endPeriod=2022&dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+url = "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_OECD@DF_RSOECD,/BEL+CAN+CHL+COL+CRI+CZE+DNK+EST+FIN+FRA+DEU+HUN+ISL+IRL+ISR+ITA+KOR+LVA+LTU+LUX+MEX+NLD+NZL+NOR+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OECD_REP+FEDOECD+UNIOECD+AUT..S13.T_1000+T_1100+T_1110+T_1120+T_1200+T_1210+T_1220+T_1300+T_2000+T_2100+T_2110+T_2120+T_2200+T_2210+T_2220+T_2300+T_2310+T_2320+T_2400+T_2410+T_2420+T_3000+T_4000+T_4100+T_4110+T_4120+T_4200+T_4210+T_4220+T_4300+T_4310+T_4320+T_4400+T_4500+T_4510+T_4520+T_4600+T_5000+T_5100+T_5110+T_5111+T_5112+T_5113+T_5120+T_5121+T_5122+T_5123+T_5124+T_5125+T_5126+T_5127+T_5128+T_5130+T_5200+T_5210+T_5211+T_5212+T_5213+T_5220+T_5300+T_6000+T_6100+T_6200+T_AA+T_AB+T_AC+T_AD+T_AE+T_AF+T_AG+T_AH+T_AI+T_AJ+T_AK+T_CUS+T_SRF+T_NWTOT+T_NWEXP+T_NWTRAN+T_SPLIT+T_GROSS+T_NET+_T..XDC.A?startPeriod=2023&endPeriod=2023&dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+
 oecd_data_national_currency<-read.csv(url)
 
 #Keep selected columns
-oecd_data_national_currency<-oecd_data_national_currency[c(5,6,11,12,19,21,25,26,27,31)]
+oecd_data_national_currency<-oecd_data_national_currency[c(5,6,11,21,25,26,27,31)]
 
 #Calculate value according to UNIT_MULT
 oecd_data_national_currency$value<- oecd_data_national_currency$OBS_VALUE*10^oecd_data_national_currency$UNIT_MULT
 
 #Keep selected columns and rename columns
-oecd_data_national_currency<-oecd_data_national_currency[c(1,2,9,11)]
+oecd_data_national_currency<-oecd_data_national_currency[c(1,2,7,9)]
 
 #Convert from long to wide format
 oecd_data_national_currency_wide <- spread (oecd_data_national_currency, key = REVENUE_CODE, value = value)
@@ -251,14 +256,48 @@ colnames(oecd_data_national_currency_wide)[colnames(oecd_data_national_currency_
 oecd_data_national_currency_wide <- merge(oecd_data_national_currency_wide, country_iso_cont_groups, by= "iso_3")
 
 #Delete redundant columns
-oecd_data_national_currency_wide <- oecd_data_national_currency_wide[,-c(68)]
+oecd_data_national_currency_wide <- oecd_data_national_currency_wide[,-c(66,67,68,69,70,71,72,73,74,75,76,78,79,80,81,83,84,85,86)]
 colnames(oecd_data_national_currency_wide)[colnames(oecd_data_national_currency_wide)=="country.x"] <- "country"
 
-#Correct country names
-oecd_data_national_currency_wide$country[oecd_data_national_currency_wide$iso_3 == "TUR"] <- "Turkey"
 
-#Keep only OECD + European countries
-oecd_europe_national_currency_wide <- subset(oecd_data_national_currency_wide, oecd_Europe==1)
+#Read Non-OECD ( BGR,HRV, MLT, ROU) + AUS+ GRC+POL+ JPN for 2022
+
+url = "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,1.1/AUS+GRC+POL+JPN+BGR+HRV+MLT+ROU..S13.T_1000+T_1100+T_1110+T_1120+T_1200+T_1210+T_1220+T_1300+T_2000+T_2100+T_2110+T_2120+T_2200+T_2210+T_2220+T_2300+T_2310+T_2320+T_2400+T_2410+T_2420+T_3000+T_4000+T_4100+T_4110+T_4120+T_4200+T_4210+T_4220+T_4300+T_4310+T_4320+T_4400+T_4500+T_4510+T_4520+T_4600+T_5000+T_5100+T_5110+T_5111+T_5112+T_5113+T_5120+T_5121+T_5122+T_5123+T_5124+T_5125+T_5126+T_5127+T_5128+T_5130+T_5200+T_5210+T_5211+T_5212+T_5213+T_5220+T_5300+T_6000+T_6100+T_6200+T_CUS+_T..XDC.A?startPeriod=2022&endPeriod=2022&dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+non_oecd_national_currency<-read.csv(url)
+
+#Keep selected columns
+non_oecd_national_currency<-non_oecd_national_currency[c(5,6,21,25,26,27)]
+
+#Calculate value according to UNIT_MULT
+non_oecd_national_currency$value<- non_oecd_national_currency$OBS_VALUE*10^non_oecd_national_currency$UNIT_MULT
+
+#Keep selected columns and rename columns
+non_oecd_national_currency<-non_oecd_national_currency[c(1,2,6,7)]
+
+#Convert from long to wide format
+non_oecd_national_currency_wide <- spread (non_oecd_national_currency, key = REVENUE_CODE, value = value)
+
+#Rename columns
+colnames(non_oecd_national_currency_wide)[colnames(non_oecd_national_currency_wide)=="Reference.area"] <- "country"
+colnames(non_oecd_national_currency_wide)[colnames(non_oecd_national_currency_wide)=="REF_AREA"] <- "iso_3"
+
+
+#Merge 'non_oecd_national_currency' dataset with country groups
+non_oecd_national_currency_wide <- merge(non_oecd_national_currency_wide, country_iso_cont_groups, by= "iso_3")
+
+
+#Delete redundant columns
+non_oecd_national_currency_wide <- non_oecd_national_currency_wide[,-c(68)]
+
+colnames(non_oecd_national_currency_wide)[colnames(non_oecd_national_currency_wide)=="country.x"] <- "country"
+
+#Merge oecd_data with non_oecd
+oecd_europe_national_currency_wide <-rbind(non_oecd_national_currency_wide, oecd_data_national_currency_wide)
+
+
+#Correct country names
+oecd_europe_national_currency_wide$country[oecd_europe_national_currency_wide$iso_3 == "TUR"] <- "Turkey"
+
 
 #Substitute NA values with 0
 oecd_europe_national_currency_wide[is.na(oecd_europe_national_currency_wide)] <- 0
@@ -268,7 +307,7 @@ write.csv(oecd_europe_national_currency_wide, "oecd_europe_wide.csv", row.names 
 
 #Correcting wealth tax data '4200' for Colombia, Greece and Hungary
 
-#In 2022 wealth tax in Colombia only applied to individuals (https://www.taxathand.com/article/35899/Colombia/2024/Tax-reform-bill-presented-to-Congress-intended-to-increase-tax-revenue)
+#In 2023 wealth tax in Colombia only applied to individuals (https://www.taxathand.com/article/35899/Colombia/2024/Tax-reform-bill-presented-to-Congress-intended-to-increase-tax-revenue)
 oecd_europe_national_currency_wide$"4210"<-ifelse(oecd_europe_national_currency_wide$iso_3== "COL", oecd_europe_national_currency_wide$"4200", oecd_europe_national_currency_wide$"4210")
 
 oecd_europe_national_currency_wide$"4210"<-ifelse(oecd_europe_national_currency_wide$iso_3== "GRC", oecd_europe_national_currency_wide$"4200"/2, oecd_europe_national_currency_wide$"4210")
@@ -372,7 +411,7 @@ oecd_europe_national_currency_wide$REM<- oecd_europe_national_currency_wide$"111
 oecd_europe_national_currency_wide$NONB<- oecd_europe_national_currency_wide$"1110_NONB"+oecd_europe_national_currency_wide$"2100_NONB"+ oecd_europe_national_currency_wide$"2200_NONB"+ oecd_europe_national_currency_wide$"3000_NONB"+oecd_europe_national_currency_wide$"4110"+oecd_europe_national_currency_wide$"4210"+oecd_europe_national_currency_wide$"4300"+oecd_europe_national_currency_wide$"5211"
 oecd_europe_national_currency_wide$UNALLOC<- oecd_europe_national_currency_wide$"1300"+oecd_europe_national_currency_wide$"2400"+oecd_europe_national_currency_wide$"4400"+oecd_europe_national_currency_wide$"4500"+oecd_europe_national_currency_wide$"4600"+oecd_europe_national_currency_wide$"5123"+oecd_europe_national_currency_wide$"5124"+oecd_europe_national_currency_wide$"5127"+oecd_europe_national_currency_wide$"5128"+oecd_europe_national_currency_wide$"5130"+oecd_europe_national_currency_wide$"5300"+oecd_europe_national_currency_wide$"6200"
 
-#Correct data for 1100 (Taxes on income, profits and capital gains of individuals) for Chile, Spain, Mexico, Poland and Portugal (they only have data for 1100, no distribution between 1110 and 1120). OECD 2017 report was used to ditributed the 1100 revenue between TL, REM and UNALLOC)
+#Correct data for 1100 (Taxes on income, profits and capital gains of individuals) for Chile, Spain, Mexico, Poland and Portugal (they only have data for 1100, no distribution between 1110 and 1120). OECD 2017 report was used to distributed the 1100 revenue between TL, REM and UNALLOC)
 oecd_europe_national_currency_wide$REM<-ifelse(oecd_europe_national_currency_wide$iso_3== "CHL", oecd_europe_national_currency_wide$REM+oecd_europe_national_currency_wide$"1100", oecd_europe_national_currency_wide$REM)
 
 oecd_europe_national_currency_wide$TL<-ifelse(oecd_europe_national_currency_wide$iso_3== "ESP", oecd_europe_national_currency_wide$TL+oecd_europe_national_currency_wide$"1100"*10489/ 79655, oecd_europe_national_currency_wide$TL)
@@ -391,11 +430,7 @@ oecd_europe_national_currency_wide$TL<-ifelse(oecd_europe_national_currency_wide
 oecd_europe_national_currency_wide$REM<-ifelse(oecd_europe_national_currency_wide$iso_3== "PRT", oecd_europe_national_currency_wide$REM+oecd_europe_national_currency_wide$"1100"*2179/ 13318, oecd_europe_national_currency_wide$REM)
 oecd_europe_national_currency_wide$UNALLOC<-ifelse(oecd_europe_national_currency_wide$iso_3== "PRT", oecd_europe_national_currency_wide$UNALLOC+oecd_europe_national_currency_wide$"1100"*10455/ 13318, oecd_europe_national_currency_wide$UNALLOC)
 
-#Correct 1120 for Denmark and US (not withholding taxes).1120 for US and Denmark is non business remittance.  
-
-oecd_europe_national_currency_wide$REM<-ifelse(oecd_europe_national_currency_wide$iso_3== "USA", oecd_europe_national_currency_wide$REM-oecd_europe_national_currency_wide$"1120", oecd_europe_national_currency_wide$REM)
-oecd_europe_national_currency_wide$NONB<-ifelse(oecd_europe_national_currency_wide$iso_3== "USA", oecd_europe_national_currency_wide$NONB+oecd_europe_national_currency_wide$"1120", oecd_europe_national_currency_wide$NONB)
-
+#Correct 1120 for Denmark (not withholding taxes).1120 for Denmark is non business remittance.
 oecd_europe_national_currency_wide$REM<-ifelse(oecd_europe_national_currency_wide$iso_3== "DNK", oecd_europe_national_currency_wide$REM-oecd_europe_national_currency_wide$"1120", oecd_europe_national_currency_wide$REM)
 oecd_europe_national_currency_wide$NONB<-ifelse(oecd_europe_national_currency_wide$iso_3== "DNK", oecd_europe_national_currency_wide$NONB+oecd_europe_national_currency_wide$"1120", oecd_europe_national_currency_wide$NONB)
 
@@ -434,6 +469,11 @@ oecd_europe_national_currency_wide$REM_per<-oecd_europe_national_currency_wide$R
 oecd_europe_national_currency_wide$NONB_per<-oecd_europe_national_currency_wide$NONB/oecd_europe_national_currency_wide$TOTALTAX
 oecd_europe_national_currency_wide$UNALLOC_per<-oecd_europe_national_currency_wide$UNALLOC/oecd_europe_national_currency_wide$TOTALTAX
 
+#Calculate different categories for tax liability
+oecd_europe_national_currency_wide$TL_SS<-(oecd_europe_national_currency_wide$"2200_TL"+-oecd_europe_national_currency_wide$"2300"+oecd_europe_national_currency_wide$"3000_TL")/oecd_europe_national_currency_wide$TOTALTAX
+oecd_europe_national_currency_wide$TL_excise<-oecd_europe_national_currency_wide$"5121"/oecd_europe_national_currency_wide$TOTALTAX
+oecd_europe_national_currency_wide$TL_income<- (oecd_europe_national_currency_wide$TL-(oecd_europe_national_currency_wide$"2200_TL"+ oecd_europe_national_currency_wide$"2300"+ oecd_europe_national_currency_wide$"3000_TL"+ oecd_europe_national_currency_wide$"4120"+ oecd_europe_national_currency_wide$"4220"+ oecd_europe_national_currency_wide$"5121"+ oecd_europe_national_currency_wide$"5122"+ oecd_europe_national_currency_wide$"5125"+ oecd_europe_national_currency_wide$"5126"+ oecd_europe_national_currency_wide$"5212"+ oecd_europe_national_currency_wide$"5213"+ oecd_europe_national_currency_wide$"5220"+ oecd_europe_national_currency_wide$"6100"))/oecd_europe_national_currency_wide$TOTALTAX
+
 #Create regional sets 
 OECD<- subset(oecd_europe_national_currency_wide, oecd== 1)
 Europe <- subset(oecd_europe_national_currency_wide, continent== "EU")
@@ -444,30 +484,42 @@ Alldata_mean_TL<- mean(oecd_europe_national_currency_wide$TL_per, na.rm=TRUE)
 Alldata_mean_REM<- mean(oecd_europe_national_currency_wide$REM_per, na.rm=TRUE)
 Alldata_mean_UNALLOC<- mean(oecd_europe_national_currency_wide$UNALLOC_per, na.rm=TRUE)
 Alldata_mean_NONB<- mean(oecd_europe_national_currency_wide$NONB_per, na.rm=TRUE)
+Alldata_mean_TL_SS<- mean(oecd_europe_national_currency_wide$TL_SS, na.rm=TRUE)
+Alldata_mean_TL_income<- mean(oecd_europe_national_currency_wide$TL_income, na.rm=TRUE)
+Alldata_mean_TL_excise<- mean(oecd_europe_national_currency_wide$TL_excise, na.rm=TRUE)
 
 OECD_mean_TL <- mean(OECD$TL_per, na.rm=TRUE)
 OECD_mean_REM <- mean(OECD$REM_per, na.rm=TRUE)
 OECD_mean_UNALLOC <- mean(OECD$UNALLOC_per, na.rm=TRUE)
 OECD_mean_NONB <- mean(OECD$NONB_per, na.rm=TRUE)
+OECD_mean_TL_SS <- mean(OECD$TL_SS, na.rm=TRUE)
+OECD_mean_TL_income <- mean(OECD$TL_income, na.rm=TRUE)
+OECD_mean_TL_excise <- mean(OECD$TL_excise, na.rm=TRUE)
 
 europe_mean_TL <- mean(Europe$TL_per, na.rm=TRUE)
 europe_mean_REM <- mean(Europe$REM_per, na.rm=TRUE)
 europe_mean_UNALLOC <- mean(Europe$UNALLOC_per, na.rm=TRUE)
 europe_mean_NONB <- mean(Europe$NONB_per, na.rm=TRUE)
+europe_mean_TL_SS <- mean(Europe$TL_SS, na.rm=TRUE)
+europe_mean_TL_income <- mean(Europe$TL_income, na.rm=TRUE)
+europe_mean_TL_excise <- mean(Europe$TL_excise, na.rm=TRUE)
 
 
 eu27_mean_TL <- mean(EU27$TL_per, na.rm=TRUE)
 eu27_mean_REM <- mean(EU27$REM_per, na.rm=TRUE)
 eu27_mean_UNALLOC <- mean(EU27$UNALLOC_per, na.rm=TRUE)
 eu27_mean_NONB <- mean(EU27$NONB_per, na.rm=TRUE)
+eu27_mean_TL_SS <- mean(EU27$TL_SS, na.rm=TRUE)
+eu27_mean_TL_income <- mean(EU27$TL_income, na.rm=TRUE)
+eu27_mean_TL_excise <- mean(EU27$TL_excise, na.rm=TRUE)
 
 #add the regional means to the table
-Alldata_mean<-c("NA","All Countries Average",round(Alldata_mean_TL, digits = 4), round(Alldata_mean_REM, digits = 4), round(Alldata_mean_UNALLOC, digits = 4), round(Alldata_mean_NONB, digits = 4))
-OECD_mean<-c("NA","OECD Average",round(OECD_mean_TL, digits = 4), round(OECD_mean_REM, digits = 4), round(OECD_mean_UNALLOC, digits = 4), round(OECD_mean_NONB, digits = 4))
-eu27_mean<-c("NA","EU 27 Average",round(eu27_mean_TL, digits = 4), round(eu27_mean_REM, digits = 4), round(eu27_mean_UNALLOC, digits = 4), round(eu27_mean_NONB, digits = 4))
-europe_mean<-c("NA", "Europe Average",round(europe_mean_TL, digits = 4), round(europe_mean_REM, digits = 4), round(europe_mean_UNALLOC, digits = 4), round(europe_mean_NONB, digits = 4))
+Alldata_mean<-c("NA","All Countries Average",round(Alldata_mean_TL, digits = 4), round(Alldata_mean_REM, digits = 4), round(Alldata_mean_UNALLOC, digits = 4), round(Alldata_mean_NONB, digits = 4), round(Alldata_mean_TL_SS, digits = 4), round(Alldata_mean_TL_income, digits = 4), round(Alldata_mean_TL_excise, digits = 4))
+OECD_mean<-c("NA","OECD Average",round(OECD_mean_TL, digits = 4), round(OECD_mean_REM, digits = 4), round(OECD_mean_UNALLOC, digits = 4), round(OECD_mean_NONB, digits = 4), round(OECD_mean_TL_SS, digits = 4), round(OECD_mean_TL_income, digits = 4), round(OECD_mean_TL_excise, digits = 4))
+eu27_mean<-c("NA","EU 27 Average",round(eu27_mean_TL, digits = 4), round(eu27_mean_REM, digits = 4), round(eu27_mean_UNALLOC, digits = 4), round(eu27_mean_NONB, digits = 4), round(eu27_mean_TL_SS, digits = 4), round(eu27_mean_TL_income, digits = 4),round(eu27_mean_TL_excise, digits = 4))
+europe_mean<-c("NA", "Europe Average",round(europe_mean_TL, digits = 4), round(europe_mean_REM, digits = 4), round(europe_mean_UNALLOC, digits = 4), round(europe_mean_NONB, digits = 4), round(europe_mean_TL_SS, digits = 4), round(europe_mean_TL_income, digits = 4), round(europe_mean_TL_excise, digits = 4))
 
-oecd_europe_national_currency_Final<- subset (oecd_europe_national_currency_wide, select = c("iso_3","country","TL_per","REM_per", "UNALLOC_per", "NONB_per"))
+oecd_europe_national_currency_Final<- subset (oecd_europe_national_currency_wide, select = c("iso_3","country","TL_per","REM_per","NONB_per","UNALLOC_per","TL_SS","TL_income","TL_excise" ))
 
 data_Final<-rbind(oecd_europe_national_currency_Final, Alldata_mean, OECD_mean, eu27_mean, europe_mean)
 
