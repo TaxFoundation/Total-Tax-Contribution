@@ -230,7 +230,7 @@ country_iso_cont_groups$Oceania <- ifelse(country_iso_cont$continent == "OC",1,0
 
 #OECD Data: OECD Countries national currency####
 
-#2023 OECD countries. Data for AUS, GRE,POL JAP is missing
+#Read 2023 OECD countries data expect for AUS, GRE, POL and JAP (missing or incomplete). 
 
 url = "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_OECD@DF_RSOECD,/BEL+CAN+CHL+COL+CRI+CZE+DNK+EST+FIN+FRA+DEU+HUN+ISL+IRL+ISR+ITA+KOR+LVA+LTU+LUX+MEX+NLD+NZL+NOR+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OECD_REP+FEDOECD+UNIOECD+AUT..S13.T_1000+T_1100+T_1110+T_1120+T_1200+T_1210+T_1220+T_1300+T_2000+T_2100+T_2110+T_2120+T_2200+T_2210+T_2220+T_2300+T_2310+T_2320+T_2400+T_2410+T_2420+T_3000+T_4000+T_4100+T_4110+T_4120+T_4200+T_4210+T_4220+T_4300+T_4310+T_4320+T_4400+T_4500+T_4510+T_4520+T_4600+T_5000+T_5100+T_5110+T_5111+T_5112+T_5113+T_5120+T_5121+T_5122+T_5123+T_5124+T_5125+T_5126+T_5127+T_5128+T_5130+T_5200+T_5210+T_5211+T_5212+T_5213+T_5220+T_5300+T_6000+T_6100+T_6200+T_AA+T_AB+T_AC+T_AD+T_AE+T_AF+T_AG+T_AH+T_AI+T_AJ+T_AK+T_CUS+T_SRF+T_NWTOT+T_NWEXP+T_NWTRAN+T_SPLIT+T_GROSS+T_NET+_T..XDC.A?startPeriod=2023&endPeriod=2023&dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
 
@@ -260,7 +260,7 @@ oecd_data_national_currency_wide <- oecd_data_national_currency_wide[,-c(66,67,6
 colnames(oecd_data_national_currency_wide)[colnames(oecd_data_national_currency_wide)=="country.x"] <- "country"
 
 
-#Read Non-OECD ( BGR,HRV, MLT, ROU) + AUS+ GRC+POL+ JPN for 2022
+#Read 2022 data for Non-OECD ( BGR,HRV, MLT, ROU) countries and AUS + GRC + POL+ JPN for which 2023 data is incomplete or missing.
 
 url = "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,1.1/AUS+GRC+POL+JPN+BGR+HRV+MLT+ROU..S13.T_1000+T_1100+T_1110+T_1120+T_1200+T_1210+T_1220+T_1300+T_2000+T_2100+T_2110+T_2120+T_2200+T_2210+T_2220+T_2300+T_2310+T_2320+T_2400+T_2410+T_2420+T_3000+T_4000+T_4100+T_4110+T_4120+T_4200+T_4210+T_4220+T_4300+T_4310+T_4320+T_4400+T_4500+T_4510+T_4520+T_4600+T_5000+T_5100+T_5110+T_5111+T_5112+T_5113+T_5120+T_5121+T_5122+T_5123+T_5124+T_5125+T_5126+T_5127+T_5128+T_5130+T_5200+T_5210+T_5211+T_5212+T_5213+T_5220+T_5300+T_6000+T_6100+T_6200+T_CUS+_T..XDC.A?startPeriod=2022&endPeriod=2022&dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
 non_oecd_national_currency<-read.csv(url)
@@ -316,11 +316,12 @@ oecd_europe_national_currency_wide$"4220"<-ifelse(oecd_europe_national_currency_
 oecd_europe_national_currency_wide$"4210"<-ifelse(oecd_europe_national_currency_wide$iso_3== "HUN", oecd_europe_national_currency_wide$"4200"/2, oecd_europe_national_currency_wide$"4210")
 oecd_europe_national_currency_wide$"4220"<-ifelse(oecd_europe_national_currency_wide$iso_3== "HUN", oecd_europe_national_currency_wide$"4200"/2, oecd_europe_national_currency_wide$"4220")
 
-#Correcting  recurrent taxes on immovable property '4100' for CHL, ESP, ITA, NZL, PRT (using distribution in tables A from OECD 2017 paper )
+#Correcting  recurrent taxes on immovable property '4100' for CHL, ESP,ISR, ITA, NZL, PRT (using distribution in tables A from OECD 2017 paper )
 oecd_europe_national_currency_wide$"4120"<-ifelse(oecd_europe_national_currency_wide$iso_3== "CHL", oecd_europe_national_currency_wide$"4100"*542478/924062, oecd_europe_national_currency_wide$"4120")
 oecd_europe_national_currency_wide$"4110"<-ifelse(oecd_europe_national_currency_wide$iso_3== "CHL", oecd_europe_national_currency_wide$"4100"-oecd_europe_national_currency_wide$"4120", oecd_europe_national_currency_wide$"4110")
 
 oecd_europe_national_currency_wide$"4110"<-ifelse(oecd_europe_national_currency_wide$iso_3== "ESP", oecd_europe_national_currency_wide$"4100"-oecd_europe_national_currency_wide$"4120", oecd_europe_national_currency_wide$"4110")
+oecd_europe_national_currency_wide$"4110"<-ifelse(oecd_europe_national_currency_wide$iso_3== "ISR", oecd_europe_national_currency_wide$"4100"-oecd_europe_national_currency_wide$"4120", oecd_europe_national_currency_wide$"4110")
 
 oecd_europe_national_currency_wide$"4120"<-ifelse(oecd_europe_national_currency_wide$iso_3== "ITA", oecd_europe_national_currency_wide$"4100"*9472/25199, oecd_europe_national_currency_wide$"4120")
 oecd_europe_national_currency_wide$"4110"<-ifelse(oecd_europe_national_currency_wide$iso_3== "ITA", oecd_europe_national_currency_wide$"4100"-oecd_europe_national_currency_wide$"4120", oecd_europe_national_currency_wide$"4110")
