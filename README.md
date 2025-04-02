@@ -17,7 +17,6 @@ The OECD's Global Revenue Statistics Database provides various categories for th
 
 | Revenue Category | Business’ Legal Tax Liability | Business’ Legal Remittance Responsibility | Non-business Remittance | Unallocated |
 | --- | --- | --- | --- | --- |
-
 | 1000. Taxes on income, profits, and capital gains |  | |  |  |
 | 1100. Taxes on income, profits, and capital gains of individuals | --- | --- | --- | --- |
 | 1110. On income and profits| Non-corporate business income subject to PIT| Withholding taxes on labor income (1) | PIT paid directly by individuals and the public sector withholding taxes on labor income |  |
@@ -70,11 +69,6 @@ The OECD's Global Revenue Statistics Database provides various categories for th
 | 6000. Other taxes | --- | --- | ---| --- |
 | --- | 6100. Paid solely by business | --- | ---| --- |
 | --- | --- | --- | ---| 6200. Paid by other than business or unidentifiable |
-| --- | --- | --- | ---| --- |
-| --- | --- | --- | ---| --- |
-| --- | --- | --- | ---| --- |
-| --- | --- | --- | ---| --- |
-| --- | --- | --- | ---| --- |
 
 Note:
 (1)	This paper characterizes the tax revenue collected in the form of withholding taxes on labor and capital income as businesses’ legal remittance responsibility.
