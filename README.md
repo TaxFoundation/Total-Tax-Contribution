@@ -16,10 +16,10 @@ Tax revenues are classified according to the methodology of OECD Revenue Statist
 The OECD's Global Revenue Statistics Database provides various categories for the different tax revenue sources. For our report, we chose and combined the categories in this table. The revenues are separated into four categories: business’ legal tax liability, business’ legal remittance responsibility, non-business remittance, and unallocated revenue.
 | Revenue Category | Business’ Legal Tax Liability | Business’ Legal Remittance Responsibility | Non-business Remittance | Unallocated |
 | --- | --- | --- | ---  | ---  |
-| 1000. Taxes on income, profits, and capital gains |---  | ---| --- |---  |
-| 1100. Taxes on income, profits, and capital gains of individuals | --- | --- | --- |---  |
+| 1000. Taxes on income, profits, and capital gains | | |  |  |
+| 1100. Taxes on income, profits, and capital gains of individuals |  |  |  |  |
 | 1110. On income and profits| Non-corporate business income subject to PIT| Withholding taxes on labor income (1) | PIT paid directly by individuals and the public sector withholding taxes on labor income | --- |
-| --- | --- | 1120. On capital gains (withholding taxes) (1) | --- | --- |
+|  |  | 1120. On capital gains (withholding taxes) (1) |  |  |
 | 1200. Corporate taxes on income, profits, and capital gains |  |  |  |  |
 |  | 1210. On income and profits |  |  |  |
 |  | 1220. On capital gains |  |  |  |
