@@ -6,7 +6,7 @@ gc()
 
 #Directory Variables####
 #setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-setwd("C:/Users/acer/Documents/GitHub/Total Tax Contribution/")
+setwd("C:/GitHub/Total Tax Contribution/")
 
 #Define Using function####
 using<-function(...,prompt=TRUE){
