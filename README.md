@@ -18,8 +18,8 @@ The OECD's Global Revenue Statistics Database provides various categories for th
 | --- | --- | --- | ---  | ---  |
 | 1000. Taxes on income, profits, and capital gains | | |  |  |
 | 1100. Taxes on income, profits, and capital gains of individuals |  |  |  |  |
-| 1110. On income and profits| Non-corporate business income subject to PIT| Withholding taxes on labor income (1) | PIT paid directly by individuals and the public sector withholding taxes on labor income | --- |
-|  |  | 1120. On capital gains (withholding taxes) (1) |  |  |
+| 1110. On income and profits| Non-corporate business income subject to PIT(1)| Withholding taxes on labor income (2) | PIT paid directly by individuals and the public sector withholding taxes on labor income | --- |
+|  |  | 1120. On capital gains (withholding taxes) (2) |  |  |
 | 1200. Corporate taxes on income, profits, and capital gains |  |  |  |  |
 |  | 1210. On income and profits |  |  |  |
 |  | 1220. On capital gains |  |  |  |
@@ -46,7 +46,7 @@ The OECD's Global Revenue Statistics Database provides various categories for th
 | 5100. Taxes on production, sale, transfer, leasing, and delivery of goods and rendering of services |  |  | |  |
 | 5110. General taxes |  |  | |  |
 |  |  | 5111. Value added taxes | |  |
-|  |  | 5112. Sales taxes | |  |
+|  |  | 5112. Sales taxes (3) | |  |
 |  |  | 5113. Turnover and other general taxes on goods and services | |  |
 | 5120. Taxes on specific goods and services |  |  | |  |
 |  | 5121. Excises |  | |  |
@@ -54,7 +54,7 @@ The OECD's Global Revenue Statistics Database provides various categories for th
 |  |  |  | | 5123. Customs and import duties |
 |  |  |  | | 5124. Taxes on exports |
 |  | 5125. Taxes on investment goods |  | |  |
-|  | 5126. Taxes on specific services (2) |  | |  |
+|  | 5126. Taxes on specific services (4) |  | |  |
 |  |  |  | | 5127. Other taxes on international trade and transactions |
 |  |  |  | | 5128. Other taxes on specific goods and services |
 |  |  |  | | 5130. Unallocable as between 5110 and 5120 |
@@ -62,18 +62,20 @@ The OECD's Global Revenue Statistics Database provides various categories for th
 | 5210. Recurrent taxes |  |  | |  |
 |  |  |  | 5211. Paid by households in respect of motor vehicles|  |
 |  | 5212. Paid by others in respect of motor vehicles |  | |  |
-|  | 5213. Other recurrent taxes (3) |  | |  |
-|  | 5220. Non-recurrent taxes (4) |  | |  |
+|  | 5213. Other recurrent taxes (5) |  | |  |
+|  | 5220. Non-recurrent taxes (6) |  | |  |
 |  |  |  | | 5300. Unallocable as between 5100 and 5200 |
 | 6000. Other taxes |  |  | |  |
 |  | 6100. Paid solely by business |  | |  |
 |  |  |  | | 6200. Paid by other than business or unidentifiable |
 
 Note:
-(1)	This paper characterizes the tax revenue collected in the form of withholding taxes on labor and capital income as businesses’ legal remittance responsibility.
-(2)	Insurance premiums, banking services, gambling and betting stakes, transport, entertainment, restaurant, and advertising charges. Taxes levied on the gross income of companies providing a specific service (transportation, insurance, banking, entertainment, restaurants, and advertising).
-(3)	Business and professional licenses paid by enterprises in order to obtain a license to carry on a particular kind of business or profession when the levies are on a recurring basis. While there might be some licenses that are not paid directly by the professionals and companies, the amount is considered negligible. Therefore, 5213 is fully considered a business legal remittance.
-(4)	Taxes levied on the emission or discharge into the environment of noxious gases, liquids, or other harmful substances. Also, once-and-for-all payments for permission to sell liquor or tobacco or to set up betting shops are included here.
+(1)	According to data from a survey conducted with delegates from OECD member countries and published in A. Milanez, “Legal tax liability, legal remittance responsibility, and tax incidence: Three dimensions of business taxation,” OECD, 2017, https://doi.org/10.1787/e7ced3ea-en.
+(2)	This paper characterizes the tax revenue collected in the form of withholding taxes on labor and capital income as businesses’ legal remittance responsibility.
+(3) Generally, sales taxes are a business’s legal remittance responsibility. However, in some instances, and especially in the US, sales taxes partly tax business inputs. This report adjusts the US’s business tax liability using the estimates available in Ernst & Young LLP, "Total state and local business taxes State-by-state estimates for FY23," December 2024, https://www.ey.com/content/dam/ey-unified-site/ey-com/en-us/insights/tax/documents/ey-50-state-tax-burden-study.pdf.
+(4)	Insurance premiums, banking services, gambling and betting stakes, transport, entertainment, restaurant, and advertising charges. Taxes levied on the gross income of companies providing a specific service (transportation, insurance, banking, entertainment, restaurants, and advertising).
+(5)	Business and professional licenses paid by enterprises in order to obtain a license to carry on a particular kind of business or profession when the levies are on a recurring basis. While there might be some licenses that are not paid directly by the professionals and companies, the amount is considered negligible. Therefore, 5213 is fully considered a business legal remittance.
+(6)	Taxes levied on the emission or discharge into the environment of noxious gases, liquids, or other harmful substances. Also, once-and-for-all payments for permission to sell liquor or tobacco or to set up betting shops are included here.
 
 
 ## Explanation of Files in Repository
@@ -83,5 +85,5 @@ Note:
 - 'SSC_government.xlsx' Table that includes social security contributions and payroll taxes paid by government in OECD member countries. This data comes from OECD's Social security contributions and payroll taxes paid by government in OECD member countries (https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_REV_COMP_OECD%40DF_SSCPTOECD&df[ag]=OECD.CTP.TPS&df[vs]=1.1&dq=AUT%2BBEL%2BCAN%2BCHL%2BCOL%2BCRI%2BCZE%2BDNK%2BEST%2BFIN%2BFRA%2BDEU%2BGRC%2BHUN%2BIRL%2BISR%2BITA%2BJPN%2BLVA%2BLTU%2BLUX%2BMEX%2BNLD%2BNZL%2BNOR%2BPOL%2BPRT%2BSVK%2BSVN%2BESP%2BSWE%2BCHE%2BTUR%2BGBR%2BUSA..S13.T_2000_3000%2BT_3000%2BT_2000..XDC.A&pd=2023%2C2023&to[TIME_PERIOD]=false&vw=ov). This data is used to calculate the Social Security contributions and Personal Income tax paid by the Public Sector.
 - 'Employment_Private_total.xlsx' Table that shows the Percentage of Private Employment in Total Employment for the year 2022. Public and total employment data comes fron the OECD's Annual employment and population for 'Developer API' (https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_NAMAIN10%40DF_TABLE3&df[ag]=OECD.SDD.NAD&df[vs]=2.0&dq=A.BEL%2BCAN%2BCHL%2BCOL%2BCRI%2BCZE%2BDNK%2BEST%2BFIN%2BFRA%2BDEU%2BGRC%2BHUN%2BISL%2BIRL%2BISR%2BITA%2BJPN%2BKOR%2BLVA%2BLTU%2BLUX%2BMEX%2BNLD%2BNZL%2BNOR%2BPOL%2BPRT%2BSVK%2BSVN%2BESP%2BSWE%2BCHE%2BGBR%2BUSA%2BEA20%2BEU27_2020%2BWXOECD%2BBRA%2BBGR%2BHRV%2BCYP%2BMLT%2BMKD%2BROU%2BRUS%2BSRB%2BZAF%2BAUT.S1%2BS13._Z%2BS1.EMP.._Z%2B_T..PS...&pd=2021%2C2023&to[TIME_PERIOD]=false&vw=tb&ly[cl]=TABLE_IDENTIFIER%2CTIME_PERIOD%2CACTIVITY&ly[rs]=SECTOR%2CCOUNTERPART_SECTOR&ly[rw]=REF_AREA), International Labour Organization (ILO), ILOSTAT (database), Public employment by sectors and sub-sectors of national accounts (https://rplumber.ilo.org/data/indicator/?id=EMP_TEMP_SEX_IND_INS_NB_A&sex=SEX_T&classif1=IND_SECTOR_TOTAL&classif2=INS_SECTOR_TOTAL+INS_SECTOR_PUB&timefrom=2022&timeto=2022&type=label&format=.csv) and OECD' Government at a Glance 2023 (https://doi.org/10.1787/3d5c5d31-en). For the countries where social security contributions and payroll taxes paid by the government is not available, we use the percentage of public employment/ total employment to calculate the Social Security contributions and Income tax paid by the Public Sector.
 - 'Pass_through.xlsx' Table that includes Non-corporate Business Tax Revenue as a Percentage of Total Taxes on Income, Profits, and Capital Gains (Revenue Statistics Category 1000). Source: Table 4 in A. Milanez, “Legal tax liability, legal remittance responsibility, and tax incidence: Three dimensions of business taxation,”  OECD, 2017, (https://doi.org/10.1787/e7ced3ea-en). This data is used to calculate the amount of individual income that is in fact non-corporate business income. 
-- 'oecd_europe_wide.csv'  Tax revenue data by category for OECD and European non-OECD countries for the year 2023. Data for Australia, Bulgaria, Croatia, Greece, Malta, Poland, Romania, and Japan is from 2022.
-- 'oecd_europe_table.csv' Table showing Business and Non-Business Sources of Revenue in OECD and EU Countries as a percentage of Total Tax Revenue.
+- 'oecd_europe_wide.csv'  Preliminary tax revenue data by category for OECD and European non-OECD countries for the year 2023. Data for Australia, Bulgaria, Croatia, Greece, Malta, Poland, Romania, and Japan is from 2022.
+- 'oecd_europe_table.csv' Final table showing Business and Non-Business Sources of Revenue in OECD and EU Countries as a percentage of Total Tax Revenue.
